@@ -6,7 +6,7 @@
 /*   By: lmother <lmother@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 19:24:51 by lmother           #+#    #+#             */
-/*   Updated: 2022/02/19 20:51:31 by lmother          ###   ########.fr       */
+/*   Updated: 2022/02/20 13:44:21 by lmother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,9 @@ int check_argv_exit(char *argv)
     i = -1;
     while (argv && argv[++i])
     {
-        if (!ft_isalnum(argv[i]))
+        if (argv[i] == '-')
+            continue;
+        if (argv[i] < '0' || argv[i] > '9')
         {
             write(1, "exit\n", 5);
             return (p_error_exit("exit", 0, "numeric argument required", argv));
@@ -53,6 +55,9 @@ int check_argv_exit(char *argv)
 
 int ft_exit(char **argv, t_env *env)
 {
+    int res;
+
+    res = 0;
     (void)env;
     if (num_of_args(argv) > 0)
     {
@@ -61,7 +66,13 @@ int ft_exit(char **argv, t_env *env)
         else if (num_of_args(argv) == 1)
         {
             write(1, "exit\n", 5);
-            exit (ft_atoi(argv[0]));
+            res = ft_atoi(argv[0]);
+            if (res < 0)
+            {
+                p_error_exit("exit", 0, "numeric argument required", argv[0]);
+                exit(res);
+            }
+            exit (res);
         }
         else
         {
@@ -72,6 +83,6 @@ int ft_exit(char **argv, t_env *env)
     else
     {
         write(1, "exit\n", 5);
-        exit (-1);
+        exit (errno);
     }
 }
