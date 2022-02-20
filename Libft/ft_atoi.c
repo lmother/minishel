@@ -6,7 +6,7 @@
 /*   By: lmother <lmother@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/18 19:28:38 by lmother           #+#    #+#             */
-/*   Updated: 2022/02/19 20:58:04 by lmother          ###   ########.fr       */
+/*   Updated: 2022/02/20 17:40:59 by lmother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ static int	ft_isspace(char c)
 
 int	ft_atoi(const char *str)
 {
-	int	i;
+	int			i;
 	long long	res;
-	int	m;
+	int			m;
 
 	i = 0;
 	m = 1;

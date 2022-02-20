@@ -1,51 +1,51 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo.c                                             :+:      :+:    :+:   */
+/*   builtin_echo.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lmother <lmother@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 20:07:42 by lmother           #+#    #+#             */
-/*   Updated: 2022/02/05 21:31:14 by lmother          ###   ########.fr       */
+/*   Updated: 2022/02/20 14:54:34 by lmother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishel.h"
 
-void    print_args(char **args)
+void	print_args(char **args)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (args[i])
-    {
-        ft_putstr_fd(args[i], 1);
-        if (args[i + 1] != NULL)
-            write(1, " ", 1);
-        i++;
-    }
+	i = 0;
+	while (args[i])
+	{
+		ft_putstr_fd(args[i], 1);
+		if (args[i + 1] != NULL)
+			write(1, " ", 1);
+		i++;
+	}
 }
 
-int echo(char *option, char **args)
+int	echo(char *option, char **args)
 {
-    int i;
+	int	i;
 
-    i = 1;
-    if (option && option[0] == '-')
-    {
-        while (option[++i])
-        {
-            if (option[i] != 'n')
-            {
-                print_args(args);
-                write(1, "\n", 1);
-                return (1);
-            }
-        }
-        print_args(++args);
-        return (0);
-    }
-    print_args(args);
-    write(1, "\n", 1);
-    return (0);
+	i = 1;
+	if (option && option[0] == '-')
+	{
+		while (option[++i])
+		{
+			if (option[i] != 'n')
+			{
+				print_args(args);
+				write(1, "\n", 1);
+				return (1);
+			}
+		}
+		print_args(++args);
+		return (0);
+	}
+	print_args(args);
+	write(1, "\n", 1);
+	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmother <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: lmother <lmother@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 15:36:56 by lmother           #+#    #+#             */
-/*   Updated: 2021/10/03 15:19:03 by lmother          ###   ########.fr       */
+/*   Updated: 2022/02/20 17:34:45 by lmother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static	void	ft_free(char **str, int n)
 	free(str);
 }
 
-static	char	**ft_splitsub(char const *str, char **res, char ch, int	s)
+static char	**ft_splitsub(char const *str, char **res, char ch, int s)
 {
 	int		i;
 	int		j;

@@ -6,7 +6,7 @@
 /*   By: lmother <lmother@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 10:54:23 by lmother           #+#    #+#             */
-/*   Updated: 2022/02/06 16:58:43 by lmother          ###   ########.fr       */
+/*   Updated: 2022/02/20 17:34:08 by lmother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*ft_strdup(const char *s1)
 		return (NULL);
 	if (!s1)
 	{
-		dup[i] = '\0'; 
+		dup[i] = '\0';
 		return (dup);
 	}
 	while (s1[i])

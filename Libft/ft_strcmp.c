@@ -6,13 +6,13 @@
 /*   By: lmother <lmother@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 18:11:59 by lmother           #+#    #+#             */
-/*   Updated: 2022/02/06 19:00:08 by lmother          ###   ########.fr       */
+/*   Updated: 2022/02/20 17:33:53 by lmother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int ft_strcmp(const char *s1, const char *s2)
+int	ft_strcmp(const char *s1, const char *s2)
 {
 	size_t			i;
 	unsigned char	*ss1;
