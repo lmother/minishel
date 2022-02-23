@@ -6,7 +6,7 @@
 /*   By: lmother <lmother@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/30 14:59:36 by lmother           #+#    #+#             */
-/*   Updated: 2022/02/20 17:32:31 by lmother          ###   ########.fr       */
+/*   Updated: 2022/02/20 20:32:03 by lmother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int main(int argc, char **argv, char **envp)
 		else if (!ft_strcmp(argv[1], "export"))
 		{
 			printf("in EXPORT\n\n");
-			error_num = export(&argv[2], env_lst);
+			error_num = export(&argv[2], env_lst, envp);
 			if (env_lst)
 				free_envlst(env_lst);
 			return (error_num);

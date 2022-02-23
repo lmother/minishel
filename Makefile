@@ -6,7 +6,7 @@
 #    By: lmother <lmother@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/30 14:54:36 by lmother           #+#    #+#              #
-#    Updated: 2022/02/19 19:27:19 by lmother          ###   ########.fr        #
+#    Updated: 2022/02/23 20:28:52 by lmother          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,8 @@ SRCS		=	minishell.c \
 				builtin_export.c \
 				builtin_unset.c \
 				builtin_env1.c \
-				builtin_exit.c
+				builtin_exit.c \
+				sort_export.c
 
 OBJS		=	$(SRCS:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: lmother <lmother@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 17:45:46 by lmother           #+#    #+#             */
-/*   Updated: 2022/02/20 15:13:45 by lmother          ###   ########.fr       */
+/*   Updated: 2022/02/20 19:23:07 by lmother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@ int	print_env(t_env *env)
 	{
 		if (tmp->val)
 			printf("%s=\"%s\"\n", tmp->key, tmp->val);
-		else
-			printf("%s\n", tmp->key);
 		tmp = tmp->next;
 	}
 	return (0);

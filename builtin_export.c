@@ -6,29 +6,37 @@
 /*   By: lmother <lmother@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 20:18:22 by lmother           #+#    #+#             */
-/*   Updated: 2022/02/20 17:29:00 by lmother          ###   ########.fr       */
+/*   Updated: 2022/02/23 20:48:23 by lmother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishel.h"
 
-int	print_export(t_env *env)
+int	print_export(t_env *env, int size)
 {
 	t_env	*tmp;
+	int		i;
 
 	tmp = env;
-	while (tmp)
+	i = 1;
+	while (i < size)
 	{
-		if (*tmp->key == '_' && ft_strlen(tmp->key) == 1)
+		if (tmp->index == i)
 		{
-			tmp = tmp->next;
-			continue ;
+			if (*tmp->key == '_' && ft_strlen(tmp->key) == 1)
+			{
+				tmp = tmp->next;
+				continue ;
+			}
+			if (tmp->val)
+				printf("declare -x %s=\"%s\"\n", tmp->key, tmp->val);
+			else
+				printf("declare -x %s\n", tmp->key);
+			i++;
 		}
-		if (tmp->val)
-			printf("declare -x %s=\"%s\"\n", tmp->key, tmp->val);
-		else
-			printf("declare -x %s\n", tmp->key);
 		tmp = tmp->next;
+		if (!tmp)
+			tmp = env;
 	}
 	return (0);
 }
@@ -42,7 +50,9 @@ int	check_argv(char *argv, char c, char *name_bin)
 	err_flag = 0;
 	while (argv[++i] && argv[i] != c)
 	{
-		if (!ft_isalpha(argv[i]) && i == 0)
+		if (argv[i] == '_')
+			i++;
+		else if (!ft_isalpha(argv[i]) && i == 0)
 			err_flag = p_error(name_bin, 0, "not a valid identifier", argv);
 		else if (!ft_isalpha(argv[i]) && !ft_isdigit(argv[i]))
 			err_flag = p_error(name_bin, 0, "not a valid identifier", argv);
@@ -66,15 +76,18 @@ int	add_to_env(t_env *env, char *content)
 	return (0);
 }
 
-int	export(char **argv, t_env *env)
+int	export(char **argv, t_env *env, char **envp)
 {
 	int	i;
 	int	err_flag;
 
 	i = -1;
 	err_flag = 0;
-	if (!argv || !num_of_args(argv))
-		return (print_export(env));
+	if (!num_of_args(argv))
+	{
+		sort_export(env, num_of_args(envp));
+		return (print_export(env, num_of_args(envp)));
+	}
 	else
 	{
 		while (argv[++i])
