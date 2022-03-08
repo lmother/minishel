@@ -6,7 +6,7 @@
 #    By: lmother <lmother@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/30 14:54:36 by lmother           #+#    #+#              #
-#    Updated: 2022/02/23 20:28:52 by lmother          ###   ########.fr        #
+#    Updated: 2022/03/08 20:50:51 by lmother          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,8 @@ SRCS		=	minishell.c \
 				builtin_unset.c \
 				builtin_env1.c \
 				builtin_exit.c \
-				sort_export.c
+				sort_export.c \
+				sig_handl.c
 
 OBJS		=	$(SRCS:.c=.o)
 
@@ -38,7 +39,7 @@ CC			=	gcc
 
 RM			=	rm -rf
 
-CFLAGS		=	-Wall -Wextra -Werror -g -include $(INC)
+CFLAGS		=	-Wall -Wextra -Werror -g -fsanitize=address -include $(INC)
 
 .PHONY:	all clean fclean re bonus
 
@@ -48,7 +49,8 @@ all:
 
 $(NAME):	$(OBJS)
 			$(CC) $(CFLAGS) -c $(SRCS)
-			$(CC) -lreadline $(CFLAGS) -o $(NAME) $(OBJS) $(SRC_LIB)/$(LIBFT)
+			$(CC) -lreadline $(CFLAGS) -o $(NAME) -lreadline -L \
+			~/.brew/opt/readline/lib -I ~/.brew/opt/readline/include $(OBJS) $(SRC_LIB)/$(LIBFT)
 
 clean:
 			$(MAKE) clean -C $(SRC_LIB)

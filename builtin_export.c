@@ -6,7 +6,7 @@
 /*   By: lmother <lmother@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 20:18:22 by lmother           #+#    #+#             */
-/*   Updated: 2022/02/23 20:48:23 by lmother          ###   ########.fr       */
+/*   Updated: 2022/03/08 18:11:32 by lmother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,14 @@ int	print_export(t_env *env, int size)
 
 	tmp = env;
 	i = 1;
-	while (i < size)
+	while (i <= size)
 	{
-		if (tmp->index == i)
+		if (tmp && tmp->index == i)
 		{
 			if (*tmp->key == '_' && ft_strlen(tmp->key) == 1)
 			{
 				tmp = tmp->next;
+				i++;
 				continue ;
 			}
 			if (tmp->val)
@@ -76,7 +77,7 @@ int	add_to_env(t_env *env, char *content)
 	return (0);
 }
 
-int	export(char **argv, t_env *env, char **envp)
+int	export(char **argv, t_env *env)
 {
 	int	i;
 	int	err_flag;
@@ -85,8 +86,8 @@ int	export(char **argv, t_env *env, char **envp)
 	err_flag = 0;
 	if (!num_of_args(argv))
 	{
-		sort_export(env, num_of_args(envp));
-		return (print_export(env, num_of_args(envp)));
+		sort_export(env, get_size_envp(env));
+		return (print_export(env, get_size_envp(env)));
 	}
 	else
 	{

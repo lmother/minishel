@@ -6,7 +6,7 @@
 /*   By: lmother <lmother@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 16:11:56 by lmother           #+#    #+#             */
-/*   Updated: 2022/02/23 20:11:43 by lmother          ###   ########.fr       */
+/*   Updated: 2022/03/08 16:41:51 by lmother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,21 @@ void	free_envlst(t_env *lst)
 		free(tmp);
 		tmp = node;
 	}
+}
+
+int	get_size_envp(t_env *env)
+{
+	int		i;
+	t_env	*tmp;
+
+	i = 0;
+	tmp = env;
+	while (tmp)
+	{
+		i++;
+		tmp = tmp->next;
+	}
+	return (i);
 }
 
 /*how many arguments*/

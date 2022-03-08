@@ -6,82 +6,68 @@
 /*   By: lmother <lmother@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/30 14:59:36 by lmother           #+#    #+#             */
-/*   Updated: 2022/02/20 20:32:03 by lmother          ###   ########.fr       */
+/*   Updated: 2022/03/08 20:53:30 by lmother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishel.h"
 
+int	execve_builtin(char **argv, t_env *env_lst)
+{
+	if (!ft_strcmp(argv[0], "cd"))
+	{
+		if (num_of_args(argv) > 1)
+			return (cd(&argv[0], env_lst));
+		else
+			cd(NULL, env_lst);
+	}
+	else if (!ft_strcmp(argv[0], "pwd"))
+		return (pwd(&argv[0]));
+	else if (!ft_strcmp(argv[0], "echo"))
+		return (echo(argv[1], &argv[1]));
+	else if (!ft_strcmp(argv[0], "export"))
+		return (export(&argv[1], env_lst));
+	else if (!ft_strcmp(argv[0], "unset"))
+		return (unset(&argv[1], env_lst));
+	else if (!ft_strcmp(argv[0], "env"))
+		return (env(&argv[1], env_lst));
+	else if (!ft_strcmp(argv[0], "exit"))
+		return (ft_exit(&argv[1], env_lst));
+	return (1);
+}
+
+void	start_readline(t_env *env)
+{
+	char	*str;
+	char	**av;
+
+	signal(SIGINT, &handler);
+	signal(SIGQUIT, &handler);
+	str = readline(BLOD COLOR(49, 31)"minishell> "CLOSE);
+	rl_on_new_line();
+	if (str && !*str)
+	{
+		free(str);
+		return ;
+	}
+	add_history(str);
+	av = ft_split(str, ' ');
+	execve_builtin(av, env);
+	free(str);
+}
 
 int main(int argc, char **argv, char **envp)
 {
 	t_env *env_lst;
-	int error_num;
-
-	env_lst = env_to_envlst(envp);
-	error_num = 0;
+	
+	(void)argv;
 	if (argc > 1)
+		exit (1);
+	env_lst = env_to_envlst(envp);
+	while (1)
 	{
-		if (!ft_strcmp(argv[1], "cd"))
-		{
-			if (argc > 2)
-			{
-				printf("in CD\n\n");
-				return (cd(&argv[1], env_lst));
-			}
-			else
-				cd(NULL, env_lst);
-		}
-		else if (!ft_strcmp(argv[1], "pwd"))
-		{
-			printf("in PWD\n\n");
-			error_num = pwd(&argv[0]);
-			if (env_lst)
-				free_envlst(env_lst);
-			return (error_num);
-		}
-		else if (!ft_strcmp(argv[1], "echo"))
-		{
-			printf("in ECHO\n\n");
-			error_num = echo(argv[2], &argv[2]);
-			if (env_lst)
-				free_envlst(env_lst);
-			return (error_num);
-		}
-		else if (!ft_strcmp(argv[1], "export"))
-		{
-			printf("in EXPORT\n\n");
-			error_num = export(&argv[2], env_lst, envp);
-			if (env_lst)
-				free_envlst(env_lst);
-			return (error_num);
-		}
-		else if (!ft_strcmp(argv[1], "unset"))
-		{
-			printf("in UNSET\n\n");
-			error_num = unset(&argv[2], env_lst);
-			if (env_lst)
-				free_envlst(env_lst);
-			return (error_num);
-		}
-		else if (!ft_strcmp(argv[1], "env"))
-		{
-			printf("in ENV\n\n");
-			error_num = env(&argv[2], env_lst);
-			if (env_lst)
-				free_envlst(env_lst);
-			return (error_num);
-		}
-		else if (!ft_strcmp(argv[1], "exit"))
-		{
-			printf("in EXIT\n\n");
-			error_num = ft_exit(&argv[2], env_lst);
-			if (env_lst)
-				free_envlst(env_lst);
-			return (error_num);
-		}
-		else
-			printf("Unknow command\n");
+		start_readline(env_lst);
 	}
+	free_envlst(env_lst);
 	return (0);
 }
