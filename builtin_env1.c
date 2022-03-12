@@ -6,11 +6,11 @@
 /*   By: lmother <lmother@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 17:45:46 by lmother           #+#    #+#             */
-/*   Updated: 2022/02/20 19:23:07 by lmother          ###   ########.fr       */
+/*   Updated: 2022/03/12 16:43:37 by lmother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishel.h"
+#include "minishell.h"
 
 t_env	*env_lstlast(t_env *lst)
 {

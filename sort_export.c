@@ -6,11 +6,11 @@
 /*   By: lmother <lmother@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 17:05:18 by lmother           #+#    #+#             */
-/*   Updated: 2022/03/08 18:07:04 by lmother          ###   ########.fr       */
+/*   Updated: 2022/03/12 16:44:46 by lmother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishel.h"
+#include "minishell.h"
 
 t_env	*find_unsort_node(t_env *env)
 {

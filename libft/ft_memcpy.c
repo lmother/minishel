@@ -1,30 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_pwd.c                                      :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmother <lmother@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ebhakaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/12 19:13:00 by lmother           #+#    #+#             */
-/*   Updated: 2022/03/12 16:43:46 by lmother          ###   ########.fr       */
+/*   Created: 2021/05/01 21:20:46 by ebhakaz           #+#    #+#             */
+/*   Updated: 2021/05/02 17:12:45 by ebhakaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int	pwd(char **args)
+void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	char	*pwd;
+	size_t			i;
+	unsigned char	*cdst;
+	unsigned char	*csrc;
 
-	(void)args;
-	pwd = getcwd(NULL, 0);
-	if (pwd)
-	{
-		write(1, pwd, ft_strlen(pwd));
-		write(1, "\n", 1);
-		free(pwd);
+	i = 0;
+	if (!(dst) && !(src))
 		return (0);
+	cdst = dst;
+	csrc = (unsigned char *)src;
+	while (i < n)
+	{
+		cdst[i] = csrc[i];
+		i++;
 	}
-	else
-		return (p_error("pwd", errno, NULL, NULL));
+	return (dst);
 }

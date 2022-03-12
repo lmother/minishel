@@ -6,11 +6,11 @@
 /*   By: lmother <lmother@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 19:24:51 by lmother           #+#    #+#             */
-/*   Updated: 2022/02/20 16:26:19 by lmother          ###   ########.fr       */
+/*   Updated: 2022/03/12 16:43:40 by lmother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishel.h"
+#include "minishell.h"
 
 static int	p_error_exit(char *s1, int errnum, char *msg, char *s2)
 {

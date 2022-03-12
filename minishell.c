@@ -6,18 +6,18 @@
 /*   By: lmother <lmother@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/30 14:59:36 by lmother           #+#    #+#             */
-/*   Updated: 2022/03/08 20:53:30 by lmother          ###   ########.fr       */
+/*   Updated: 2022/03/12 18:19:34 by lmother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishel.h"
+#include "minishell.h"
 
 int	execve_builtin(char **argv, t_env *env_lst)
 {
 	if (!ft_strcmp(argv[0], "cd"))
 	{
 		if (num_of_args(argv) > 1)
-			return (cd(&argv[0], env_lst));
+			return (cd(&argv[1], env_lst));
 		else
 			cd(NULL, env_lst);
 	}
@@ -39,20 +39,28 @@ int	execve_builtin(char **argv, t_env *env_lst)
 void	start_readline(t_env *env)
 {
 	char	*str;
-	char	**av;
 
 	signal(SIGINT, &handler);
-	signal(SIGQUIT, &handler);
-	str = readline(BLOD COLOR(49, 31)"minishell> "CLOSE);
+	signal(SIGQUIT, SIG_IGN);
 	rl_on_new_line();
+	str = readline(BLOD COLOR(49, 33)"minishell> "CLOSE);
 	if (str && !*str)
 	{
 		free(str);
 		return ;
 	}
+	else if (str == NULL)
+	{
+		write(1, "exit\n", 6);
+		exit(0);
+	}
 	add_history(str);
+	parser(str);
+	/*only for test builtins*/
+	char **av;
 	av = ft_split(str, ' ');
 	execve_builtin(av, env);
+	/*------------------*/
 	free(str);
 }
 
@@ -65,9 +73,7 @@ int main(int argc, char **argv, char **envp)
 		exit (1);
 	env_lst = env_to_envlst(envp);
 	while (1)
-	{
 		start_readline(env_lst);
-	}
 	free_envlst(env_lst);
 	return (0);
 }

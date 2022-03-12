@@ -1,30 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_pwd.c                                      :+:      :+:    :+:   */
+/*   ft_lstadd_back_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmother <lmother@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ebhakaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/12 19:13:00 by lmother           #+#    #+#             */
-/*   Updated: 2022/03/12 16:43:46 by lmother          ###   ########.fr       */
+/*   Created: 2021/05/05 19:02:37 by ebhakaz           #+#    #+#             */
+/*   Updated: 2021/05/05 21:40:00 by ebhakaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int	pwd(char **args)
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	char	*pwd;
+	t_list	*tmp;
 
-	(void)args;
-	pwd = getcwd(NULL, 0);
-	if (pwd)
+	if (*lst)
 	{
-		write(1, pwd, ft_strlen(pwd));
-		write(1, "\n", 1);
-		free(pwd);
-		return (0);
+		tmp = ft_lstlast(*lst);
+		tmp->next = new;
 	}
 	else
-		return (p_error("pwd", errno, NULL, NULL));
+		*lst = new;
 }

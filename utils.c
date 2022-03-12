@@ -6,11 +6,11 @@
 /*   By: lmother <lmother@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 16:11:56 by lmother           #+#    #+#             */
-/*   Updated: 2022/03/08 16:41:51 by lmother          ###   ########.fr       */
+/*   Updated: 2022/03/12 16:44:52 by lmother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishel.h"
+#include "minishell.h"
 
 int	p_error(char *s1, int errnum, char *msg, char *s2)
 {

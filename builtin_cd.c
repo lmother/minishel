@@ -6,11 +6,11 @@
 /*   By: lmother <lmother@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 19:20:21 by lmother           #+#    #+#             */
-/*   Updated: 2022/02/20 14:53:33 by lmother          ###   ########.fr       */
+/*   Updated: 2022/03/12 18:18:07 by lmother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishel.h"
+#include "minishell.h"
 
 int	add_pwd_oldpw(t_env *env, char *key, char *val)
 {
@@ -85,6 +85,9 @@ int	cd(char **args, t_env *env)
 			return (ch_dir(key, env));
 	}
 	else
-		return (ch_dir(args[1], env));
+	{
+		printf("%s\n", args[0]);
+		return (ch_dir(args[0], env));
+	}
 	return (1);
 }

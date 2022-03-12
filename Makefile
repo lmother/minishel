@@ -6,14 +6,14 @@
 #    By: lmother <lmother@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/30 14:54:36 by lmother           #+#    #+#              #
-#    Updated: 2022/03/08 20:50:51 by lmother          ###   ########.fr        #
+#    Updated: 2022/03/12 18:10:22 by lmother          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRC_LIB		=	./Libft
+SRC_LIB		=	./libft
 LIBFT		=	libft.a
 
-INC			=	./minishel.h
+INC			=	./minishell.h
 
 NAME		=	minishell
 
@@ -28,11 +28,14 @@ SRCS		=	minishell.c \
 				builtin_env1.c \
 				builtin_exit.c \
 				sort_export.c \
-				sig_handl.c
+				sig_handl.c \
+				parser.c \
+				utils_for_parser.c \
+				preparser.c
 
 OBJS		=	$(SRCS:.c=.o)
 
-%.o:		%.c $(INC)
+%.o:		%.c $(INC) Makefile
 			$(CC) $(CFLAGS)  -c $< -o $(<:.c=.o)
 
 CC			=	gcc
@@ -50,7 +53,8 @@ all:
 $(NAME):	$(OBJS)
 			$(CC) $(CFLAGS) -c $(SRCS)
 			$(CC) -lreadline $(CFLAGS) -o $(NAME) -lreadline -L \
-			~/.brew/opt/readline/lib -I ~/.brew/opt/readline/include $(OBJS) $(SRC_LIB)/$(LIBFT)
+			~/.brew/opt/readline/lib -I ~/.brew/opt/readline/include \
+			$(OBJS) $(SRC_LIB)/$(LIBFT)
 
 clean:
 			$(MAKE) clean -C $(SRC_LIB)

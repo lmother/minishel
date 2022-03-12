@@ -6,11 +6,11 @@
 /*   By: lmother <lmother@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 20:23:52 by lmother           #+#    #+#             */
-/*   Updated: 2022/02/20 16:36:04 by lmother          ###   ########.fr       */
+/*   Updated: 2022/03/12 16:43:49 by lmother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishel.h"
+#include "minishell.h"
 
 void	rm_key(t_env *env, char *argv)
 {

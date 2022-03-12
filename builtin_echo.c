@@ -6,11 +6,11 @@
 /*   By: lmother <lmother@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 20:07:42 by lmother           #+#    #+#             */
-/*   Updated: 2022/02/20 14:54:34 by lmother          ###   ########.fr       */
+/*   Updated: 2022/03/12 16:43:25 by lmother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishel.h"
+#include "minishell.h"
 
 void	print_args(char **args)
 {

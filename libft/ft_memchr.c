@@ -1,30 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_pwd.c                                      :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmother <lmother@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ebhakaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/12 19:13:00 by lmother           #+#    #+#             */
-/*   Updated: 2022/03/12 16:43:46 by lmother          ###   ########.fr       */
+/*   Created: 2021/05/02 16:13:33 by ebhakaz           #+#    #+#             */
+/*   Updated: 2021/05/02 18:23:39 by ebhakaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int	pwd(char **args)
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	char	*pwd;
+	size_t			i;
+	unsigned char	*src;
+	unsigned char	sym;
 
-	(void)args;
-	pwd = getcwd(NULL, 0);
-	if (pwd)
+	i = 0;
+	src = (unsigned char *)s;
+	sym = c;
+	while (i < n)
 	{
-		write(1, pwd, ft_strlen(pwd));
-		write(1, "\n", 1);
-		free(pwd);
-		return (0);
+		if (src[i] == sym)
+			return ((void *)(s + i));
+		i++;
 	}
-	else
-		return (p_error("pwd", errno, NULL, NULL));
+	return (0);
 }

@@ -6,11 +6,11 @@
 /*   By: lmother <lmother@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 18:54:29 by lmother           #+#    #+#             */
-/*   Updated: 2022/03/08 18:06:17 by lmother          ###   ########.fr       */
+/*   Updated: 2022/03/12 16:43:29 by lmother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishel.h"
+#include "minishell.h"
 
 static void	edit_key(t_env *tmp, char *val)
 {
