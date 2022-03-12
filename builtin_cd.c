@@ -6,7 +6,7 @@
 /*   By: lmother <lmother@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 19:20:21 by lmother           #+#    #+#             */
-/*   Updated: 2022/03/12 18:18:07 by lmother          ###   ########.fr       */
+/*   Updated: 2022/03/12 20:23:00 by lmother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,6 @@ int	cd(char **args, t_env *env)
 			return (ch_dir(key, env));
 	}
 	else
-	{
-		printf("%s\n", args[0]);
 		return (ch_dir(args[0], env));
-	}
 	return (1);
 }
