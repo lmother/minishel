@@ -6,11 +6,25 @@
 /*   By: lmother <lmother@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 20:23:52 by lmother           #+#    #+#             */
-/*   Updated: 2022/03/12 16:43:49 by lmother          ###   ########.fr       */
+/*   Updated: 2022/03/13 14:37:25 by lmother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+char	*get_valenv(char *key, t_env *env)
+{
+	t_env	*tmp;
+
+	tmp = env;
+	while (tmp)
+	{
+		if (!ft_strcmp(tmp->key, key))
+			return (tmp->val);
+		tmp = tmp->next;
+	}
+	return (NULL);
+}
 
 void	rm_key(t_env *env, char *argv)
 {

@@ -6,7 +6,7 @@
 /*   By: lmother <lmother@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/30 14:56:01 by lmother           #+#    #+#             */
-/*   Updated: 2022/03/12 17:55:18 by lmother          ###   ########.fr       */
+/*   Updated: 2022/03/13 14:35:04 by lmother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ t_env	*create_first_elment(char *str);
 int		sort_export(t_env *env, int size);
 int		get_size_envp(t_env *env);
 void    handler(int signal);
+char	*get_valenv(char *key, t_env *env);
 
 /*builtins*/
 int		cd(char **args, t_env *env);

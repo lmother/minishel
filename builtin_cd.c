@@ -6,7 +6,7 @@
 /*   By: lmother <lmother@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 19:20:21 by lmother           #+#    #+#             */
-/*   Updated: 2022/03/12 20:23:00 by lmother          ###   ########.fr       */
+/*   Updated: 2022/03/13 15:59:14 by lmother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,26 +61,52 @@ int	change_key(t_env *env, char *key, char *val)
 	return (1);
 }
 
-int	ch_dir(char *path, t_env *env)
+int	ch_dir_try(char	*path, t_env *env)
 {
 	change_key(env, "OLDPWD", getcwd(NULL, 0));
 	if (!chdir(path))
-		change_key(env, "PWD", getcwd(NULL, 0));
+		return (change_key(env, "PWD", getcwd(NULL, 0)));
 	else
 		return (p_error("cd", errno, NULL, path));
-	return (0);
+	return (1);
+}
+
+int	ch_dir(char *path, t_env *env)
+{
+	char	*val;
+	int		res;
+	
+	val = ft_strdup(get_valenv("OLDPWD", env));
+	res = 0;
+	if (!ft_strcmp(path, "~"))
+	{
+		if (!ch_dir_try("/Users/lmother", env)
+				|| !ch_dir_try("/Users/ebhakaz", env))
+			return (0);
+	}
+	if (!ft_strcmp(path, "-"))
+	{
+		if (val)
+		{
+			res = ch_dir_try(val, env);
+			free(val);
+			return (res);
+		}
+		else
+			return (p_error("cd", 0, "OLDPWD not set", NULL));
+	}
+	return (ch_dir_try(path, env));
 }
 
 int	cd(char **args, t_env *env)
 {
 	char	*key;
 
-	key = NULL;
+	key = get_valenv("HOME", env);
 	if (!num_of_args(args))
 	{
-		key = getenv("HOME");
 		if (!key)
-			return (0);
+			return (p_error("cd", 0, "HOME not set", NULL));
 		else
 			return (ch_dir(key, env));
 	}
