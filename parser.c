@@ -6,7 +6,7 @@
 /*   By: lmother <lmother@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 14:05:41 by ebhakaz           #+#    #+#             */
-/*   Updated: 2022/03/12 20:40:09 by lmother          ###   ########.fr       */
+/*   Updated: 2022/03/20 18:15:10 by lmother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,6 @@ void	parser(char *s)
 		return ;
 	}
 	res = start_parser(s);
-	//printf("after %s\n", res);
-	//free(res);
+	printf("after %s\n", res);
+	free(res);
 }

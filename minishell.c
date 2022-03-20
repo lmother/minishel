@@ -6,7 +6,7 @@
 /*   By: lmother <lmother@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/30 14:59:36 by lmother           #+#    #+#             */
-/*   Updated: 2022/03/12 20:40:13 by lmother          ###   ########.fr       */
+/*   Updated: 2022/03/20 18:14:59 by lmother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,6 @@ void	start_readline(t_env *env)
 	}
 	add_history(str);
 	parser(str);
-	/*only for test builtins*/
-	char **av;
-	av = ft_split(str, ' ');
-	execve_builtin(av, env);
-	/*------------------*/
-	free(str);
 }
 
 int main(int argc, char **argv, char **envp)

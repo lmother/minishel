@@ -6,7 +6,7 @@
 /*   By: lmother <lmother@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 19:20:21 by lmother           #+#    #+#             */
-/*   Updated: 2022/03/13 15:59:14 by lmother          ###   ########.fr       */
+/*   Updated: 2022/03/13 16:23:45 by lmother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	ch_dir(char *path, t_env *env)
 	}
 	if (!ft_strcmp(path, "-"))
 	{
-		if (val)
+		if (val && !findkey_env(env, "OLDPWD", 0))
 		{
 			res = ch_dir_try(val, env);
 			free(val);
