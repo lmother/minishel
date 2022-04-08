@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_cd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmother <lmother@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ebhakaz <ebhakaz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 19:20:21 by lmother           #+#    #+#             */
-/*   Updated: 2022/03/13 16:23:45 by lmother          ###   ########.fr       */
+/*   Updated: 2022/04/05 23:50:04 by ebhakaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,13 +75,13 @@ int	ch_dir(char *path, t_env *env)
 {
 	char	*val;
 	int		res;
-	
+
 	val = ft_strdup(get_valenv("OLDPWD", env));
 	res = 0;
 	if (!ft_strcmp(path, "~"))
 	{
 		if (!ch_dir_try("/Users/lmother", env)
-				|| !ch_dir_try("/Users/ebhakaz", env))
+			|| !ch_dir_try("/Users/ebhakaz", env))
 			return (0);
 	}
 	if (!ft_strcmp(path, "-"))

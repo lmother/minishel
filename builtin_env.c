@@ -6,7 +6,7 @@
 /*   By: lmother <lmother@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 18:54:29 by lmother           #+#    #+#             */
-/*   Updated: 2022/03/12 16:43:29 by lmother          ###   ########.fr       */
+/*   Updated: 2022/04/07 21:46:26 by lmother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ t_env	*env_lstnew(char *content)
 		*spec_sym = '\0';
 		newlst->key = ft_strdup(tmp);
 		newlst->val = ft_strdup(++spec_sym);
+		*(--spec_sym) = '=';
 		newlst->next = NULL;
 	}
 	else if (tmp)
@@ -78,6 +79,15 @@ t_env	*env_lstnew(char *content)
 	return (newlst);
 }
 /*add node to env list from envp*/
+
+static t_env	*add_back(t_env *new, char *str)
+{
+	new = env_lstlast(new);
+	new->next = env_lstnew(str);
+	if (!new->next)
+		return (NULL);
+	return (new);
+}
 
 t_env	*env_to_envlst(char **envp)
 {
@@ -93,17 +103,13 @@ t_env	*env_to_envlst(char **envp)
 		if (!new)
 		{
 			new = env_lstnew(envp[i]);
+			new->envp = copy_envp(envp);
 			head = new;
 			if (!new)
 				return (NULL);
 		}
 		else
-		{
-			new = env_lstlast(new);
-			new->next = env_lstnew(envp[i]);
-			if (!new->next)
-				return (NULL);
-		}
+			new = add_back(new, envp[i]);
 	}
 	return (head);
 }

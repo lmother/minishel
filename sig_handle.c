@@ -1,48 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_env1.c                                     :+:      :+:    :+:   */
+/*   sig_handle.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lmother <lmother@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/19 17:45:46 by lmother           #+#    #+#             */
-/*   Updated: 2022/04/07 22:09:47 by lmother          ###   ########.fr       */
+/*   Created: 2022/03/08 19:53:13 by lmother           #+#    #+#             */
+/*   Updated: 2022/04/08 15:14:28 by lmother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_env	*env_lstlast(t_env *lst)
+void	handler(int signal)
 {
-	t_env	*tmp;
-
-	tmp = lst;
-	if (tmp != NULL)
+	if (signal == SIGINT)
 	{
-		while (tmp->next != 0)
-			tmp = tmp->next;
+		rl_on_new_line();
+		rl_redisplay();
+		write(1, "  \b\b\n", 5);
+		rl_on_new_line();
+		rl_replace_line("", 1);
+		rl_redisplay();
 	}
-	return (tmp);
 }
 
-int	print_env(t_env *env)
+void	handler_child(int signal)
 {
-	t_env	*tmp;
-
-	tmp = env;
-	while (tmp)
+	if (signal== SIGINT)
 	{
-		if (tmp->val)
-			printf("%s=\"%s\"\n", tmp->key, tmp->val);
-		tmp = tmp->next;
+		write(2, "\n", 1);
+		rl_on_new_line();
 	}
-	return (0);
-}
-
-int	env(char **argv, t_env *env)
-{
-	if (!num_of_args(argv))
-		return (print_env(env));
-	else
-		return (p_error("env", 2, NULL, argv[0]));
+	else if (signal == SIGQUIT)
+	{
+		write(2, "Quit: 3\n", 8);
+	}
 }
