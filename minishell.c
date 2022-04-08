@@ -6,7 +6,7 @@
 /*   By: lmother <lmother@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/30 14:59:36 by lmother           #+#    #+#             */
-/*   Updated: 2022/04/07 19:49:40 by lmother          ###   ########.fr       */
+/*   Updated: 2022/04/08 18:05:43 by lmother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	start_readline(t_parser *parser)
 	}
 	if (!(str))
 	{
-		write(1, "exit\n", 6);
+		printf("\033[1m\033[149;33mminishell\033[0m> exit\n");
 		exit(0);
 	}
 	add_history(str);
@@ -38,12 +38,14 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_env		*env_lst;
 	t_parser	parser;
+	char		**env;
 
 	(void)argv;
 	parser.exit_code = 0;
 	if (argc > 1)
 		exit (1);
 	env_lst = env_to_envlst(envp);
+	env = new_envp(env_lst);
 	parser.env = env_lst;
 	while (1)
 		start_readline(&parser);

@@ -6,7 +6,7 @@
 /*   By: lmother <lmother@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 18:44:03 by lmother           #+#    #+#             */
-/*   Updated: 2022/04/08 14:15:47 by lmother          ###   ########.fr       */
+/*   Updated: 2022/04/08 18:05:12 by lmother          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,21 +34,30 @@ char	**copy_envp(char **envp)
 
 char	**new_envp(t_env *env)
 {
-	int		size;
 	int		i;
 	char	**res;
+	t_env	*tmp;
+	char	*str;
 
-	size = get_size_envp(env);
-	i = 0;
-	res = malloc(sizeof(char *) * size);
+	i = get_size_envp(env);
+	str = NULL;
+	tmp = env;
+	res = malloc(sizeof(char *) * i);
 	if (!res)
 		return (NULL);
-	while (i < size)
+	i = -1;
+	while (tmp)
 	{
-		res[i] = ft_strjoin(res[i], env->key);
-		res[i] = ft_strjoin(res[i], "=");
-		res[i] = ft_strjoin(res[i], env->val);
-		i++;
+		res[++i] = ft_strdup(tmp->key);
+		str = ft_strdup(res[i]);
+		free(res[i]);
+		res[i] = ft_strjoin(str, "=");
+		free(str);
+		str = ft_strdup(res[i]);
+		free(res[i]);
+		res[i] = ft_strjoin(str, tmp->val);
+		free(str);
+		tmp = tmp->next;
 	}
 	return (res);
 }
